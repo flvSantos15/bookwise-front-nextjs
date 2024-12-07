@@ -1,52 +1,76 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}'
-  ],
+  content: ['.src/**/*.tsx'],
   theme: {
     extend: {
       fontFamily: {
         sans: ['var(--font-nunito)']
       },
+      space: {
+        px: '1px',
+        1: '0.25rem',
+        2: '0.5rem',
+        3: '0.75rem',
+        4: '1rem',
+        5: '1.25rem',
+        6: '1.5rem',
+        7: '1.75rem',
+        8: '2rem',
+        10: '2.5rem'
+      },
+
+      fontSizes: {
+        xs: '0.75rem',
+        sm: '0.875rem',
+        md: '1rem',
+        lg: '1.125rem',
+        xl: '1.25rem',
+        '2xl': '1.5rem'
+      },
+      fontWeights: {
+        regular: '400',
+        medium: '500',
+        bold: '700'
+      },
+
+      lineHeights: {
+        shorter: '125%',
+        short: '140%',
+        base: '160%',
+        tall: '180%'
+      },
       colors: {
+        white: '#FFFFFF',
+        black: '#000000',
         gray: {
-          100: '#f8f9fc',
-          200: '#e6e8f2',
-          300: '#d1d6e4',
-          400: '#8d95af',
-          700: '#1b1c2a',
-          800: '#0e1116'
+          100: '#F8F9FC',
+          200: '#E6E8F2',
+          300: '#D1D6E4',
+          400: '#8D95AF',
+          500: '#303F73',
+          600: '#252D4A',
+          700: '#181C2A',
+          800: '#0E1116'
         },
         purple: {
-          100: '#83b1d9',
-          200: '#2a2879',
-          300: '#303f73',
-          400: '#252d4a'
+          100: '#8381D9',
+          200: '#2A2879'
         },
         green: {
-          50: '#50b2c0',
-          100: '#255d6a',
-          200: '#0a313c'
+          100: '#50B2C0',
+          200: '#255D6A',
+          300: '#0A313C'
         },
-        gradient: {
-          horizontal: 'linear-gradient(90deg, #7FD1CC 0%, #9694F5 100%)',
-          vertical: 'linear-gradient(180deg, #7FD1CC 0%, #9694F5 100%)'
-        },
-        yellow: {
-          50: '#fff9ec',
-          100: '#ffebc4',
-          200: '#ffe2a7',
-          300: '#ffd47f',
-          400: '#ffcc66',
-          500: '#ffbf40',
-          600: '#e8ae3a',
-          700: '#b5882d',
-          800: '#8c6923',
-          900: '#6b501b'
-        }
+        'gradient-vertical': `linear-gradient(180deg, #7FD1CC 0%, #9694F5 100%)`,
+        'gradient-horizontal': `linear-gradient(90deg, #7FD1CC 0%, #9694F5 100%)`
+      },
+      radii: {
+        xs: '2.5px',
+        sm: '5px',
+        md: '10px',
+        lg: '20px',
+        full: '99999px'
       }
     }
   },

@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 import { Nunito_Sans as Nunito } from 'next/font/google'
-import { Sidebar } from '@/components/Sidebar'
+import { Sidebar } from '@/src/components/Sidebar'
 
 const nunito = Nunito({ subsets: ['latin'], variable: '--font-nunito' })
 
