@@ -17,4 +17,6 @@
 }
 
 body {
+  font-smoothing: antialiesed;
+  font-family: Nunito, Helvetica, sans-serif;
 }

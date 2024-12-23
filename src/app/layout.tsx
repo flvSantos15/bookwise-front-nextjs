@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 import { Nunito_Sans as Nunito } from 'next/font/google'
-import { Sidebar } from '@/src/components/Sidebar'
+import { Sidebar } from '@/components/Sidebar'
 
 const nunito = Nunito({ subsets: ['latin'], variable: '--font-nunito' })
 
@@ -19,13 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${nunito.variable} font-[sans] bg-gray-800`}>
+      <body className={`${nunito.variable} font-sans bg-gray-800`}>
         <main className="flex h-screen">
-          <Sidebar />
-
-          <div className="flex-1 border border-solid border-[red]">
-            {children}
-          </div>
+          <div className="flex-1">{children}</div>
         </main>
       </body>
     </html>
