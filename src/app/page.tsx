@@ -1,14 +1,18 @@
 'use client'
 
 import { FcGoogle } from 'react-icons/fc'
+import { FaGithub } from 'react-icons/fa'
+import { PiRocketLaunchLight } from 'react-icons/pi'
 
-export default function Home() {
+import { Button } from '@/components/Button'
+
+export default function SignIn() {
   return (
-    <div className="w-full flex">
-      <div className="w-[598px] h-screen">
+    <div className="w-full flex h-[100%]">
+      <div className="w-[650px] h-screen">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          className="h-screen object-cover"
+          className="h-full object-cover rounded-[10px]"
           src="/images/background-login.png"
           alt="background"
         />
@@ -26,14 +30,17 @@ export default function Home() {
           </div>
 
           <div className="w-full h-[248px] flex flex-col gap-4">
-            {/* TODO: componentizar esse botao com todos os states e props dele */}
-            <button className="flex h-[72px] gap-5 px-6 py-5 rounded-lg bg-gray-600 items-center">
+            <Button title="Entrar com Google">
               <FcGoogle className="w-8 h-8" />
+            </Button>
 
-              <span className="text-gray-200 font-bold text-lg leadind-base">
-                Entrar com Google
-              </span>
-            </button>
+            <Button title="Entrar com Google">
+              <FaGithub className="w-8 h-8 text-zinc-100" />
+            </Button>
+
+            <Button title="Acessar como visitante">
+              <PiRocketLaunchLight className="w-8 h-8 text-purple-100" />
+            </Button>
           </div>
         </div>
       </div>

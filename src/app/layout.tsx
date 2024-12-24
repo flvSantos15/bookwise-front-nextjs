@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${nunito.variable} font-sans bg-gray-800`}>
         <main className="flex h-screen">
-          <div className="flex-1">{children}</div>
+          <div className="flex-1 p-4">{children}</div>
         </main>
       </body>
     </html>
