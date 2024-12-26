@@ -21,7 +21,7 @@ export function Sidebar() {
       <a className="flex p-1 justify-center items-center gap-3 rounded-[4px]">
         <p className="text-base font-bold text-gray-100">Fazer login</p>
 
-        <PiSignIn size={32} color="#f8f9fc" />
+        <PiSignIn className="w-5 h-5 text-green-100" />
       </a>
     </div>
   )

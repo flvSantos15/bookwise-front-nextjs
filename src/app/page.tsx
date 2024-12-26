@@ -9,7 +9,7 @@ import { Button } from '@/components/Button'
 export default function SignIn() {
   return (
     <div className="w-full flex h-[100%]">
-      <div className="w-[650px] h-screen">
+      <div className="w-[650px] h-[100%]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="h-full object-cover rounded-[10px]"
@@ -18,7 +18,7 @@ export default function SignIn() {
         />
       </div>
 
-      <div className="w-full h-screen flex items-center justify-center">
+      <div className="w-full h-[100%] flex items-center justify-center">
         <div className="w-[372px] h-[350px] flex flex-col gap-10">
           <div className="w-full h-[62px] flex flex-col gap-0.5">
             <span className="font-bold text-2xl leadind-[140%] text-gray-100">

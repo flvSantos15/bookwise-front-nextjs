@@ -12,20 +12,22 @@ interface NavItemProps {
 export function NavItem({ title, icon: Icon, route }: NavItemProps) {
   const pathname = usePathname()
 
-  const isCurrentPage = pathname.split('/').pop() === route
+  const isCurrentItem = pathname.split('/').pop() === route
   return (
-    <div className="flex py-2 items-center gap-3 w-full cursor-pointer">
-      {isCurrentPage ? (
+    <button
+      data-active={isCurrentItem}
+      // disabled={isCurrentItem}
+      className="flex py-2 items-center gap-3 w-full text-gray-400 data-[active=true]:text-gray-100 enabled:hover:text-gray-100 group"
+    >
+      {isCurrentItem ? (
         <div className="bg-gradient-vertical w-1 h-6 rounded-[999px]" />
       ) : (
         <div className="bg-transparent w-1 h-6 rounded-[999px]" />
       )}
 
-      <Icon size={32} color="#fff" />
+      <Icon className="w-6 h-6 " />
 
-      <p className="text-base text-gray-100 font-bold leadind-[160%]">
-        {title}
-      </p>
-    </div>
+      <p className="text-base font-bold leadind-[160%]">{title}</p>
+    </button>
   )
 }

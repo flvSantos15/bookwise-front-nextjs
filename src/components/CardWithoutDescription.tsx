@@ -1,28 +1,32 @@
+'use client'
+
+import StarRatings from "react-star-ratings";
+
 export function CardWithoutDescription() {
   return (
-    <div className="flex px-6 py-5 gap-6 items-start rounded-lg bg-purple-400 hover:border-2 hover:border-solid hover:border-purple-300">
-      <div className="w-[108px] h-[152px] rounded-[4px] border border-solid border-[red]"></div>
+    <div className="flex px-5 py-4 gap-5 items-start rounded-lg bg-gray-700 border-2 border-gray-700 hover:border-gray-600">
+      <div className="w-[64px] h-[94px] rounded-[4px] border"></div>
 
-      <div className="flex flex-col justify-between items-start flex-1">
-        <div className="flex flex-col items-start gap-3">
-          <div className="flex justify-between items-center">
-            <p className="text-sm font-normal text-gray-300">Hoje</p>
+      <div className="flex flex-col items-start justify-between flex-1 py-[2px h-[100%]">
+        <div className="flex flex-col items-start">
+          <p className="font-bold text-gray-100">A revolução dos bichos</p>
 
-            <div className="flex items-center gap-1 border border-solid border-[blue]"></div>
-          </div>
-
-          <div className="flex flex-col items-start">
-            <p className="text-base font-bold text-gray-100">
-              Entendo Algoritmos
-            </p>
-            <p className="text-sm font-normal text-gray-400">Aditya Bhargava</p>
-          </div>
+          <p className="text-sm font-normal text-gray-400">George Orwell</p>
         </div>
 
-        <p className="text-sm font-normal text-gray-300">
-          Nec tempor nunc in egestas. Euismod nisi eleifend at et in sagittis.
-          Penatibus id vestibulum imperdiet a at imperdiet lectu...
-        </p>
+        <div className="flex w-[96px]">
+          <StarRatings
+            rating={4}
+            // changeRating={handleSendRating}
+            starRatedColor="#8381D9"
+            starHoverColor="#8381D9"
+            starEmptyColor="#dddddd"
+            starDimension="16px"
+            starSpacing="2px"
+            name="rating"
+            svgIconViewBox="0 0 50 50"
+          />
+        </div>
       </div>
     </div>
   )
