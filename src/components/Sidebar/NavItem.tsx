@@ -1,6 +1,7 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { useStore } from '@/zustand-store'
+import { usePathname, useRouter } from 'next/navigation'
 import { ElementType } from 'react'
 
 interface NavItemProps {
@@ -11,12 +12,24 @@ interface NavItemProps {
 
 export function NavItem({ title, icon: Icon, route }: NavItemProps) {
   const pathname = usePathname()
+  const router = useRouter()
+  const { getCurrentPageTitle } = useStore((store) => {
+    return {
+      getCurrentPageTitle: store.getCurrentPageTitle
+    }
+  })
+
+  function handleNavigate() {
+    getCurrentPageTitle(title)
+    router.push(route)
+  }
 
   const isCurrentItem = pathname.split('/').pop() === route
   return (
     <button
       data-active={isCurrentItem}
       // disabled={isCurrentItem}
+      onClick={handleNavigate}
       className="flex py-2 items-center gap-3 w-full text-gray-400 data-[active=true]:text-gray-100 enabled:hover:text-gray-100 group"
     >
       {isCurrentItem ? (

@@ -1,10 +1,9 @@
-import { PrismaClient } from '@prisma/client'
-import { books } from '@/constants/books'
-import { categories } from '@/constants/categories'
-import { ratings } from '@/constants/ratings'
-import { users } from '@/constants/users'
+import { prisma } from '@/libs/prisma'
 
-const prisma = new PrismaClient()
+import { books } from '../src/constants/books'
+import { categories } from '../src/constants/categories'
+import { ratings } from '../src/constants/ratings'
+import { users } from '../src/constants/users'
 
 async function main() {
   await prisma.rating.deleteMany()

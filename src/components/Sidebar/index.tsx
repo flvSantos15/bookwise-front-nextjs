@@ -15,11 +15,13 @@ export function Sidebar() {
       <div className="h-[90%] flex flex-col gap-4">
         <NavItem title="Início" route="home" icon={PiChartLineUp} />
 
-        <NavItem title="Explorar" route="explore" icon={PiBinoculars} />
+        <NavItem title="Explorer" route="explorer" icon={PiBinoculars} />
       </div>
 
       <a className="flex p-1 justify-center items-center gap-3 rounded-[4px]">
-        <p className="text-base font-bold text-gray-100">Fazer login</p>
+        <p className="text-base font-bold text-gray-100 whitespace-nowrap">
+          Fazer login
+        </p>
 
         <PiSignIn className="w-5 h-5 text-green-100" />
       </a>

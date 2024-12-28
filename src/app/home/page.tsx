@@ -1,26 +1,37 @@
-import { IoIosArrowForward } from "react-icons/io";
-import { PiChartLineUp } from 'react-icons/pi'
+'use client'
+
+import { useEffect } from 'react'
+
+import { IoIosArrowForward } from 'react-icons/io'
+
+import { useStore } from '@/zustand-store'
 
 import { PopularList } from '@/components/PopularList'
 import { RecentList } from '@/components/RecentList'
 import { Sidebar } from '@/components/Sidebar'
+import { HeaderPage } from '@/components/HeaderPage'
+import { Container } from '@/components/Container'
 
 export default function Home() {
+  const { load } = useStore((store) => {
+    return {
+      load: store.load
+    }
+  })
+
+  useEffect(() => {
+    load()
+  }, [])
+
   return (
     <div className="w-full flex h-[100%] gap-24">
       <Sidebar />
 
-      <div className="flex flex-col gap-10 h-[100%] scrollbar scrollbar-thumb-sky-700 scrollbar-track-sky-300 overflow-y-scroll">
-        <div className="flex items-center justify-start gap-3">
-          <PiChartLineUp className="w-8 h-8 text-green-100" />
+      <Container>
+        <HeaderPage />
 
-          <p className="text-2xl font-bold leadind-[160%] text-gray-100">
-            Início
-          </p>
-        </div>
-
-        <div className="flex gap-14">
-        {/* w-[608px] belongs to below */}
+        <div className="flex gap-14 w-full">
+          {/* w-[608px] belongs to below */}
           <div className="flex flex-col gap-4">
             <p className="font-normal text-sm text-gray-100">
               Avaliações mais recentes
@@ -38,7 +49,6 @@ export default function Home() {
 
               <button className="flex items-center gap-2 text-purple-100 font-bold text-sm">
                 Ver todos
-
                 <IoIosArrowForward className="w-4 h-4" />
               </button>
             </div>
@@ -46,7 +56,7 @@ export default function Home() {
             <PopularList />
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   )
 }
