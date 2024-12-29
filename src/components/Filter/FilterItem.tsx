@@ -6,11 +6,7 @@ interface FilterItemProps {
 }
 
 export default function FilterItem({ title, selected }: FilterItemProps) {
-  const { setSelectedCategory } = useStore((store) => {
-    return {
-      setSelectedCategory: store.getSelectedCategory
-    }
-  })
+  const setSelectedCategory = useStore((store) => store.setSelectedCategory)
 
   function handleSelectCategory() {
     setSelectedCategory(title)

@@ -1,12 +1,29 @@
 'use client'
 
-import { FcGoogle } from 'react-icons/fc'
-import { FaGithub } from 'react-icons/fa'
-import { PiRocketLaunchLight } from 'react-icons/pi'
-
-import { Button } from '@/components/Button'
+import { AutheticationButtons } from '@/components/AuthenticationButtons'
+import { loginWithGoogle } from '@/service/server-actions/login-with-google'
 
 export default function SignIn() {
+  async function handleLoginWithGoogle() {
+    try {
+      const user = await loginWithGoogle()
+      console.log('User logged in:', user)
+      alert('login with google')
+    } catch (error) {
+      console.error('Login failed:', error)
+    }
+  }
+
+  async function handleLoginWithGithub() {
+    try {
+      // const user = await loginAction();
+      // console.log("User logged in:", user);
+      alert('login with github')
+    } catch (error) {
+      console.error('Login failed:', error)
+    }
+  }
+
   return (
     <div className="w-full flex h-[100%]">
       <div className="w-[650px] h-[100%]">
@@ -29,19 +46,10 @@ export default function SignIn() {
             </span>
           </div>
 
-          <div className="w-full h-[248px] flex flex-col gap-4">
-            <Button title="Entrar com Google">
-              <FcGoogle className="w-8 h-8" />
-            </Button>
-
-            <Button title="Entrar com Google">
-              <FaGithub className="w-8 h-8 text-zinc-100" />
-            </Button>
-
-            <Button title="Acessar como visitante">
-              <PiRocketLaunchLight className="w-8 h-8 text-purple-100" />
-            </Button>
-          </div>
+          <AutheticationButtons
+            onLoginWithGithub={handleLoginWithGithub}
+            onLoginWithGoogle={handleLoginWithGoogle}
+          />
         </div>
       </div>
     </div>

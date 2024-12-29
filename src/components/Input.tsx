@@ -1,8 +1,17 @@
+import { ChangeEvent } from 'react'
 import { LuSearch } from 'react-icons/lu'
+
+import { useStore } from '@/zustand-store'
 
 interface Input {}
 
 export function Input() {
+  const { handleSearch } = useStore()
+
+  function handleSearchData(e: ChangeEvent<HTMLInputElement>) {
+    handleSearch(e.target.value)
+  }
+
   return (
     <label
       id="input"
@@ -11,7 +20,8 @@ export function Input() {
       <input
         type="text"
         id="input"
-        placeholder="Buscar livro ou autor"
+        onChange={handleSearchData}
+        placeholder="Buscar livro"
         className="flex-1 font-normal text-sm text-gray-400 bg-gray-800 autofill:bg-gray-800 outline-none ring-0 border-none"
       />
       {/*  */}

@@ -12,11 +12,7 @@ import { Sidebar } from '@/components/Sidebar'
 import { Input } from '@/components/Input'
 
 export default function Explorer() {
-  const { load } = useStore((store) => {
-    return {
-      load: store.load
-    }
-  })
+  const load = useStore((store) => store.load)
 
   useEffect(() => {
     load()
@@ -26,7 +22,6 @@ export default function Explorer() {
     <div className="w-full flex h-[100%] gap-24">
       <Sidebar />
 
-      {/* pt-8 */}
       <div className="flex flex-col gap-10 w-[100%]">
         <div className="flex items-center justify-between gap-3 w-full mt-8">
           <HeaderPage />
@@ -36,9 +31,9 @@ export default function Explorer() {
 
         <Filter />
 
-        <ScrollArea.Root>
-          <ScrollArea.Viewport className="">
-            <div className="flex h-[420px] gap-14 border border-yellow-300">
+        <ScrollArea.Root className="h-[80%] overflow-hidden">
+          <ScrollArea.Viewport className="h-[100%]">
+            <div className="flex gap-14">
               <BookList />
             </div>
           </ScrollArea.Viewport>

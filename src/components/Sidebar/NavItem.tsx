@@ -13,14 +13,11 @@ interface NavItemProps {
 export function NavItem({ title, icon: Icon, route }: NavItemProps) {
   const pathname = usePathname()
   const router = useRouter()
-  const { getCurrentPageTitle } = useStore((store) => {
-    return {
-      getCurrentPageTitle: store.getCurrentPageTitle
-    }
-  })
+
+  const setCurrentPageTitle = useStore((store) => store.setCurrentPageTitle)
 
   function handleNavigate() {
-    getCurrentPageTitle(title)
+    setCurrentPageTitle(title)
     router.push(route)
   }
 

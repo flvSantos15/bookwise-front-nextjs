@@ -24,10 +24,18 @@ export interface Rating {
   id: string
   rate: number
   description: string
-  created_at: Date
+  created_at: string
 
+  book: Book
+  user: User
+}
+
+interface CategoriesOnBooks {
   book_id: string
-  user_id: string
+  categoryId: string
+
+  book: Book
+  category: Category
 }
 
 export interface Category {
@@ -42,6 +50,7 @@ export interface Book {
   summary: string
   cover_url: string
   ratings: Rating[]
+  categories: CategoriesOnBooks[]
 
   total_pages: number
   created_at: Date

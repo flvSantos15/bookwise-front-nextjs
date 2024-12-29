@@ -1,62 +1,107 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import { useEffect } from 'react'
 
 import { IoIosArrowForward } from 'react-icons/io'
+import { useRouter } from 'next/navigation'
 
-import { useStore } from '@/zustand-store'
+import { useCurrentData, useStore } from '@/zustand-store'
 
-import { PopularList } from '@/components/PopularList'
-import { RecentList } from '@/components/RecentList'
+import { RecentPublishedBookList } from '@/components/RecentPublishedBookList'
+import { RatingList } from '@/components/RatingList'
 import { Sidebar } from '@/components/Sidebar'
 import { HeaderPage } from '@/components/HeaderPage'
 import { Container } from '@/components/Container'
+import { Spinner } from '@/components/Spinner'
+import { ReviewCard } from '@/components/ReviewCard'
 
 export default function Home() {
-  const { load } = useStore((store) => {
-    return {
-      load: store.load
-    }
-  })
+  const router = useRouter()
+
+  const load = useStore((store) => store.load)
+
+  const { isLoading, books } = useCurrentData()
+
+  function handleRedirectToExplorePage() {
+    router.push('/explorer')
+  }
 
   useEffect(() => {
+    if (books.length > 0) return
+
     load()
-  }, [])
+  }, [books])
+
+  if (isLoading) {
+    return (
+      <div className="flex w-full h-[100%]">
+        <Spinner />
+      </div>
+    )
+  }
 
   return (
     <div className="w-full flex h-[100%] gap-24">
       <Sidebar />
 
-      <Container>
-        <HeaderPage />
+      <div className="flex flex-col gap-10 w-[100%]">
+        <div className="flex items-center justify-between gap-3 w-full mt-8 py-[10px]">
+          <HeaderPage />
+        </div>
 
-        <div className="flex gap-14 w-full">
-          {/* w-[608px] belongs to below */}
-          <div className="flex flex-col gap-4">
-            <p className="font-normal text-sm text-gray-100">
-              Avaliações mais recentes
-            </p>
+        <Container>
+          <div className="flex gap-14 w-full">
+            <div className="flex flex-col gap-4">
+              <>
+                <div className="flex flex-col gap-4 mb-4">
+                  <div className="flex items-center justify-between">
+                    <p className="font-normal text-sm text-gray-100">
+                      Sua última leitura
+                    </p>
 
-            <RecentList />
-          </div>
+                    <button
+                      onClick={handleRedirectToExplorePage}
+                      className="flex items-center gap-1 text-purple-100 font-bold text-sm"
+                    >
+                      Ver todas
+                      <IoIosArrowForward className="w-4 h-4" />
+                    </button>
+                  </div>
 
-          <div className="flex flex-col gap-4">
-            {/* w-[324px] belongs to above */}
-            <div className="flex items-center justify-between">
-              <p className="font-normal text-sm text-gray-100">
-                Livros mais recentes
-              </p>
+                  <ReviewCard />
+                </div>
+              </>
 
-              <button className="flex items-center gap-2 text-purple-100 font-bold text-sm">
-                Ver todos
-                <IoIosArrowForward className="w-4 h-4" />
-              </button>
+              <>
+                <p className="font-normal text-sm text-gray-100">
+                  Avaliações mais recentes
+                </p>
+
+                <RatingList />
+              </>
             </div>
 
-            <PopularList />
+            <div className="flex flex-col gap-4 w-full">
+              <div className="flex items-center justify-between">
+                <p className="font-normal text-sm text-gray-100">
+                  Livros mais recentes
+                </p>
+
+                <button
+                  onClick={handleRedirectToExplorePage}
+                  className="flex items-center gap-1 text-purple-100 font-bold text-sm"
+                >
+                  Ver todos
+                  <IoIosArrowForward className="w-4 h-4" />
+                </button>
+              </div>
+
+              <RecentPublishedBookList />
+            </div>
           </div>
-        </div>
-      </Container>
+        </Container>
+      </div>
     </div>
   )
 }

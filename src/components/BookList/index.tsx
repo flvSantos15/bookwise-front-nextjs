@@ -1,18 +1,14 @@
-import { CardWithoutDescription } from '@/components/CardWithoutDescription'
-import { useStore } from '@/zustand-store'
+import { BookCard } from '@/components/BookCard'
+import { useCurrentData } from '@/zustand-store'
 
 export function BookList() {
-  const { books } = useStore((store) => {
-    return {
-      books: store.books
-    }
-  })
+  const { books } = useCurrentData()
 
   return (
     <div className="grid grid-cols-3 gap-4 w-full">
       {books &&
         books?.map((book) => {
-          return <CardWithoutDescription key={book.id} data={book} />
+          return <BookCard key={book.id} book={book} />
         })}
     </div>
   )

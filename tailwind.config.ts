@@ -43,6 +43,9 @@ const config: Config = {
       colors: {
         white: '#FFFFFF',
         black: '#000000',
+        red: {
+          500: '#F75A68'
+        },
         gray: {
           100: '#F8F9FC',
           200: '#E6E8F2',
@@ -63,7 +66,9 @@ const config: Config = {
           300: '#0A313C'
         },
         vertical: 'linear-gradient(180deg, #7FD1CC 0%, #9694F5 100%)',
-        horizontal: 'linear-gradient(90deg, #7FD1CC 0%, #9694F5 100%)'
+        horizontal: 'linear-gradient(90deg, #7FD1CC 0%, #9694F5 100%)',
+        'gradient-vertical':
+          'linear-gradient(to bottom, #7FD1CC 0%, #9694F5 100%)'
       },
       backgroundImage: {
         'forecast-gradient':
@@ -82,8 +87,6 @@ const config: Config = {
       }
     }
   },
-  plugins: [
-    require('tailwind-scrollbar')
-  ]
+  plugins: [require('tailwind-scrollbar')]
 }
 export default config

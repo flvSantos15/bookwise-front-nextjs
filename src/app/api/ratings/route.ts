@@ -3,18 +3,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/libs/prisma'
 
 export async function GET(request: NextRequest) {
-  const response = await prisma.book.findMany({
+  const response = await prisma.rating.findMany({
     include: {
-      ratings: {
-        include: {
-          user: true
-        }
-      },
-      categories: {
-        include: {
-          category: true
-        }
-      }
+      book: true,
+      user: true
     }
   })
 
