@@ -1,0 +1,47 @@
+{
+  "name": "bookwise",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@auth/core": "^0.37.4",
+    "@auth/prisma-adapter": "^2.7.4",
+    "@headlessui/react": "^2.2.0",
+    "@prisma/client": "^6.0.1",
+    "@radix-ui/react-scroll-area": "^1.2.2",
+    "axios": "^1.7.9",
+    "next": "14.0.3",
+    "next-auth": "^5.0.0-beta.25",
+    "nookies": "^2.5.2",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-icons": "^4.12.0",
+    "react-spinners": "^0.15.0",
+    "react-star-ratings": "^2.3.0",
+    "ts-node": "^10.9.2",
+    "uuid": "^11.0.3",
+    "zustand": "^4.3.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/react-star-ratings": "^2.3.3",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.3",
+    "postcss": "^8",
+    "prisma": "^6.0.1",
+    "tailwind-scrollbar": "^3.1.0",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  }
+}
