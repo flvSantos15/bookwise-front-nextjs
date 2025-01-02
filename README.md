@@ -1,7 +1,5 @@
 # BookWise
 
-================
-
 [![Cover Image](cover.png)](cover.png)
 
 ## Table of Contents
@@ -23,14 +21,25 @@ O BookWise e uma plataforma de recomendacoes para leitores, onde eles podem aval
 
 ---
 
-- List your project's features here.
+- Autheticate using github.
+- Autheticate using google.
+- Create a book avaliation.
 
 ## Stack
 
 ---
 
-- ReactJS, NextJS
+- ReactJS
+- NextJS
+- TypeScript
 - TailwindCSS
+- Zustand
+- Prisma
+- Headlessui
+- RadixUI
+- Axios
+- Next-auth
+- Nookies
 
 ## Authors
 
