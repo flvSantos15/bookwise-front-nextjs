@@ -25,6 +25,7 @@
     "react-star-ratings": "^2.3.0",
     "ts-node": "^10.9.2",
     "uuid": "^11.0.3",
+    "zod": "^3.24.1",
     "zustand": "^4.3.8"
   },
   "devDependencies": {

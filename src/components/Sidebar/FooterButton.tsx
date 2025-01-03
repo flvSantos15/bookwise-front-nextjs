@@ -4,6 +4,7 @@
 
 import { ElementType } from 'react'
 import { useSession } from 'next-auth/react'
+import { useStore } from '@/zustand-store'
 
 interface FooterButtonProps {
   icon: ElementType
@@ -18,10 +19,14 @@ export function FooterButton({
 }: FooterButtonProps) {
   const { data: session } = useSession()
 
+  const getUserEmail = useStore((store) => store.getUserEmail)
+
   const user = {
     ...session?.user,
     avatar_url: session?.user?.image
   }
+
+  getUserEmail(session?.user?.email!)
 
   return (
     <button

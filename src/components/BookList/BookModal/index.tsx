@@ -150,7 +150,9 @@ export function BookModal({ isOpenModal, onCloseModal }: BookModalProps) {
                         </button>
                       </div>
 
-                      {status === 'authenticated' && <AvaliationForm />}
+                      {status === 'authenticated' && (
+                        <AvaliationForm onCloseModal={onCloseModal} />
+                      )}
 
                       <CommentList />
                     </div>

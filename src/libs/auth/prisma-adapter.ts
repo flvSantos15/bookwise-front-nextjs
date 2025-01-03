@@ -133,7 +133,7 @@ export function MyPrismaAdapter(config: any): Adapter {
     async linkAccount(account) {
       await prisma.account.create({
         data: {
-          user_id: account.userId,
+          userId: account.userId,
           type: account.type,
           provider: account.provider,
           providerAccountId: account.providerAccountId,
@@ -167,7 +167,7 @@ export function MyPrismaAdapter(config: any): Adapter {
     async getSessionAndUser(sessionToken) {
       const prismaSession = await prisma.session.findUnique({
         where: {
-          session_token: sessionToken
+          sessionToken: sessionToken
         },
         include: {
           user: true
@@ -196,9 +196,9 @@ export function MyPrismaAdapter(config: any): Adapter {
 
       return {
         session: {
-          userId: session.user_id,
+          userId: session.userId,
           expires: session.expires,
-          sessionToken: session.session_token
+          sessionToken: session.sessionToken
         },
         user: {
           id: user?.id!,
@@ -213,17 +213,17 @@ export function MyPrismaAdapter(config: any): Adapter {
     async updateSession({ sessionToken, userId, expires }) {
       const prismaSession = await prisma.session.update({
         where: {
-          session_token: sessionToken
+          sessionToken: sessionToken
         },
         data: {
           expires,
-          user_id: userId
+          userId: userId
         }
       })
 
       return {
-        sessionToken: prismaSession.session_token,
-        userId: prismaSession.user_id,
+        sessionToken: prismaSession.sessionToken,
+        userId: prismaSession.userId,
         expires: prismaSession.expires
       }
     },
@@ -231,7 +231,7 @@ export function MyPrismaAdapter(config: any): Adapter {
     async deleteSession(sessionToken) {
       await prisma.session.delete({
         where: {
-          session_token: sessionToken
+          sessionToken: sessionToken
         }
       })
     }

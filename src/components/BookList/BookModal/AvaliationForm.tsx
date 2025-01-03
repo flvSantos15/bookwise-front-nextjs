@@ -2,24 +2,37 @@ import StarRatings from 'react-star-ratings'
 import { MdOutlineClose } from 'react-icons/md'
 import { IoMdCheckmark } from 'react-icons/io'
 import { FormEvent, useState } from 'react'
+import { useCurrentData, useStore } from '@/zustand-store'
+import { AvaliateBook } from '@/service/server-actions/avaliate-book'
 
 /* eslint-disable @next/next/no-img-element */
-interface AvaliationFormProps {}
+interface AvaliationFormProps {
+  onCloseModal: () => void
+}
 
-export function AvaliationForm({}: AvaliationFormProps) {
+export function AvaliationForm({ onCloseModal }: AvaliationFormProps) {
+  const load = useStore((store) => store.load)
+  const { currentUser, currentBook } = useCurrentData()
+
   const [rating, setRating] = useState(0)
 
-  function handleSubmmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget)
-
     const comment = formData.get('comment')
 
-    console.log({
-      rating,
-      comment
+    await AvaliateBook({
+      rate: rating,
+      description: comment as string,
+      bookId: currentBook?.id!,
+      userId: currentUser?.id!
     })
+
+    setRating(0)
+    formData.delete('comment')
+    event.currentTarget.reset()
+    load()
   }
 
   return (
@@ -29,14 +42,14 @@ export function AvaliationForm({}: AvaliationFormProps) {
     >
       <div className="flex items-center justify-between gap-4 w-full">
         <img
-          // src={rating?.user?.avatar_url}
-          src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+          src={currentUser?.avatar_url}
+          // src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
           alt=""
           className="w-10 h-10 rounded-full"
         />
 
         <div className="flex flex-col flex-1">
-          <span className="text-gray-100 font-bold">Cristofer Colombo</span>
+          <span className="text-gray-100 font-bold">{currentUser?.name}</span>
         </div>
 
         <div className="flex flex-col gap-2">

@@ -8,6 +8,9 @@ export async function GET(request: NextRequest) {
       ratings: {
         include: {
           user: true
+        },
+        orderBy: {
+          created_at: 'desc'
         }
       },
       categories: {
