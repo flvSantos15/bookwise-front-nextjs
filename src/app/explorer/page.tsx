@@ -14,11 +14,17 @@ import { Input } from '@/components/Input'
 import { SessionProvider } from 'next-auth/react'
 
 export function ExplorerPage() {
-  const load = useStore((store) => store.load)
+  const { load, books } = useStore((store) => {
+    return {
+      load: store.load,
+      books: store.books
+    }
+  })
 
   useEffect(() => {
+    if (books) return
     load()
-  }, [])
+  }, [books])
 
   return (
     <div className="w-full flex h-[100%] gap-24">

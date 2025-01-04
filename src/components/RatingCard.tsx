@@ -14,7 +14,7 @@ export function RatingCard({ rating }: PageProps) {
     <div className="flex flex-col px-6 py-5 gap-8 items-start rounded-lg bg-gray-600 border-2 border-gray-600 hover:border-gray-500">
       <div className="flex gap-4 h-12">
         <img
-          src={String(rating?.user?.avatar_url).replace('public', '')}
+          src={rating?.user?.avatar_url}
           alt=""
           className="w-10 h-10 rounded-full"
         />
@@ -45,7 +45,7 @@ export function RatingCard({ rating }: PageProps) {
 
       <div className="flex gap-5">
         <img
-          src={String(rating?.book?.cover_url).replace('public', '')}
+          src={`/${rating?.book?.cover_url}`}
           alt="Cover book"
           className="w-[108px] h-[152px] rounded-[4px]"
         />

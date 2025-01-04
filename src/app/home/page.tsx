@@ -17,15 +17,15 @@ import { HeaderPage } from '@/components/HeaderPage'
 import { Container } from '@/components/Container'
 import { Spinner } from '@/components/Spinner'
 import { ReviewCard } from '@/components/ReviewCard'
-import { get } from 'http'
 
 export function HomePage() {
   const router = useRouter()
   const { status } = useSession()
 
-  const { load, setCurrentPageTitle } = useStore((store) => {
+  const { load, setCurrentPageTitle, books } = useStore((store) => {
     return {
       load: store.load,
+      books: store.books,
       setCurrentPageTitle: store.setCurrentPageTitle
     }
   })
@@ -38,8 +38,9 @@ export function HomePage() {
   }
 
   useEffect(() => {
+    if (books) return
     load()
-  }, [])
+  }, [books])
 
   if (isLoading) {
     return (

@@ -19,8 +19,15 @@
 - SQLite
 - Axios
 - Zod
+- TanStack Query
 
 ## Erros
 
 - Quando estoui na tela de explorer e volto pra home, fica carregando infinito.
 - Quando faco login, saio e tento entrar novamente nao consigo.
+
+## Detalhes
+
+- Vou utilizar o tanstack query para requisições.
+- Vou tentar usar o patternde services junto com o tanstack query.
+- O Zustande apenas para o livro atual, categoria selecionada, titulo da pagina.

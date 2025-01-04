@@ -2,7 +2,7 @@
 
 'use client'
 
-import { ElementType } from 'react'
+import { ElementType, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useStore } from '@/zustand-store'
 
@@ -26,7 +26,9 @@ export function FooterButton({
     avatar_url: session?.user?.image
   }
 
-  getUserEmail(session?.user?.email!)
+  useEffect(() => {
+    getUserEmail(session?.user?.email!)
+  }, [])
 
   return (
     <button

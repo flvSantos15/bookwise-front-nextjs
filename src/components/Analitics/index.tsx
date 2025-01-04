@@ -5,23 +5,37 @@ import { PiUserListLight } from 'react-icons/pi'
 import { GoBookmark } from 'react-icons/go'
 
 import { AnaliticsItem } from './item'
+import { useCurrentData, useStore } from '@/zustand-store'
+import { useSession } from 'next-auth/react'
 
 interface AnaliticsProps {}
 
 export function Analitics({}: AnaliticsProps) {
+  const { data: session } = useSession()
+
+  const { currentUser } = useStore((store) => {
+    const currentUser = store.users.find(
+      (user) => user.email === session?.user?.email
+    )
+
+    return { currentUser }
+  })
+
   return (
     <div className="h-[555px] flex flex-col gap-8 border-l border-l-gray-700">
       <div className="flex flex-col items-center gap-5 pb-2">
         <img
           className="w-[72px] h-[72px] rounded-full border-2 border-green-100"
-          src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          src={currentUser?.avatar_url}
           alt="Rounded avatar"
         />
 
         <div className="flex flex-col">
-          <span className="text-gray-100 font-bold text-xl">Flavio Santos</span>
+          <span className="text-gray-100 font-bold text-xl">
+            {currentUser?.name}
+          </span>
           <span className="text-gray-400 font-normal text-sm">
-            Membro desde 2019
+            Membro desde {String(currentUser?.created_at).split('-')[0]}
           </span>
         </div>
       </div>

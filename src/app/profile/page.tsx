@@ -7,10 +7,24 @@ import { HeaderPage } from '@/components/HeaderPage'
 import { Input } from '@/components/Input'
 import { MyReviewList } from '@/components/MyReview'
 import { Sidebar } from '@/components/Sidebar'
+import { useStore } from '@/zustand-store'
 import { SessionProvider } from 'next-auth/react'
+import { useEffect } from 'react'
 import StarRatings from 'react-star-ratings'
 
 export function ProfilePage() {
+  const { load, books } = useStore((store) => {
+    return {
+      load: store.load,
+      books: store.books
+    }
+  })
+
+  useEffect(() => {
+    if (books) return
+    load()
+  }, [books])
+
   return (
     <div className="w-full flex h-[100%] gap-24">
       <Sidebar />

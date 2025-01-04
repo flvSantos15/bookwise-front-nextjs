@@ -3,6 +3,7 @@ import { auth } from '@/auth'
 import { NextRequest, NextResponse } from 'next/server'
 
 const protectedRoutes = ['/profile']
+const listRoutes = ['/home', '/explorer', '/profile']
 
 export default async function middleware(req: NextRequest) {
   const session = await auth()
@@ -11,8 +12,17 @@ export default async function middleware(req: NextRequest) {
     req.nextUrl.pathname.startsWith(route)
   )
 
+  const isListRoute = listRoutes.some((route) =>
+    req.nextUrl.pathname.startsWith(route)
+  )
+
   if (!session && isProtected) {
     const absoluteURL = new URL('/', req.nextUrl.origin)
+    return NextResponse.redirect(absoluteURL.toString())
+  }
+
+  if (session && !isListRoute) {
+    const absoluteURL = new URL('/home', req.nextUrl.origin)
     return NextResponse.redirect(absoluteURL.toString())
   }
 
