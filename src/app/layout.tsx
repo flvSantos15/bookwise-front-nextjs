@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { Nunito_Sans as Nunito } from 'next/font/google'
+import GlobalProvider from '@/context/global-context'
 
 import './globals.css'
+import { queryClient } from '@/libs/quer-client'
 
 const nunito = Nunito({ subsets: ['latin'], variable: '--font-nunito' })
 
@@ -18,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.variable} font-sans bg-gray-800`}>
-        <main className="flex h-screen">
-          <div className="flex-1 p-4">{children}</div>
-        </main>
+        <GlobalProvider>
+          <main className="flex h-screen">
+            <div className="flex-1 p-4">{children}</div>
+          </main>
+        </GlobalProvider>
       </body>
     </html>
   )

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import StarRatings from 'react-star-ratings'
 
 import { useStore } from '@/zustand-store'
@@ -9,6 +9,7 @@ import { useStore } from '@/zustand-store'
 import { Book } from '@/interfaces'
 
 import { BookModal } from './BookList/BookModal'
+import Image from 'next/image'
 
 interface PageProps {
   book: Book
@@ -35,9 +36,11 @@ export function BookCard({ book }: PageProps) {
         className="flex px-5 py-4 gap-5 items-start rounded-lg bg-gray-700 border-2 border-gray-700 hover:border-gray-600 cursor-pointer"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={String(book?.cover_url).replace('public', '')}
+        <Image
+          src={book?.cover_url}
           alt={book?.name}
+          width={64}
+          height={94}
           className="w-[64px] h-[94px] rounded-[4px]"
         />
 

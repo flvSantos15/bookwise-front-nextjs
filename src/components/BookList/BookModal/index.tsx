@@ -7,7 +7,7 @@ import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import { MdBookmarkBorder } from 'react-icons/md'
 import { IoBookOutline } from 'react-icons/io5'
 
-import { useCurrentData } from '@/zustand-store'
+import { useCurrentData, useStore } from '@/zustand-store'
 import { getBookMediaRating } from '@/utils/get-book-media-rating'
 
 import { CommentList } from '../../Comment'
@@ -15,6 +15,8 @@ import { CloseButton } from './CloseButton'
 import { LoginModal } from '@/components/LoginModal'
 import { AvaliationForm } from './AvaliationForm'
 import { useSession } from 'next-auth/react'
+import { getBooks } from '@/service/book-service'
+import { useQuery } from '@tanstack/react-query'
 
 interface BookModalProps {
   isOpenModal: boolean
@@ -23,7 +25,19 @@ interface BookModalProps {
 
 export function BookModal({ isOpenModal, onCloseModal }: BookModalProps) {
   const { status } = useSession()
-  const { currentBook } = useCurrentData()
+
+  const { data: books } = useQuery({
+    queryKey: ['books'],
+    queryFn: getBooks
+  })
+
+  const { currentBook } = useStore((store) => {
+    const currentBook = books?.find((book) => book.id === store.currentBookId)
+
+    return {
+      currentBook
+    }
+  })
 
   const { media } = getBookMediaRating({ ratings: currentBook?.ratings! })
 

@@ -1,12 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-import { formatDate } from '@/utils/format-date'
-import { useCurrentData } from '@/zustand-store'
+import { useQuery } from '@tanstack/react-query'
 import StarRatings from 'react-star-ratings'
+
+import { getMyLastingRating } from '@/service/rating-service'
+
+import { formatDate } from '@/utils/format-date'
 
 interface ReviewCardProps {}
 
 export function ReviewCard({}: ReviewCardProps) {
-  const { myLastRating } = useCurrentData()
+  const { data: myLastRating } = useQuery({
+    queryKey: ['myLastRating'],
+    queryFn: getMyLastingRating
+  })
 
   if (!myLastRating) {
     return (

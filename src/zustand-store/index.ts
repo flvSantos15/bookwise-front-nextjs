@@ -1,14 +1,11 @@
 import { create } from 'zustand'
 import { api } from '../libs/axios'
-import { Account, Book, Category, Rating, Session, User } from '@/interfaces'
+import { Account, Session, User } from '@/interfaces'
 
 export interface PlayerState {
   isLoading: boolean
   users: User[]
   currentUserEmail: string
-  books: Book[]
-  categories: Category[]
-  ratings: Rating[]
   account: Account | null
   session: Session | null
 
@@ -32,9 +29,6 @@ export const useStore = create<PlayerState>((set, get) => {
     session: null,
     users: [],
     currentUserEmail: '',
-    books: [],
-    categories: [],
-    ratings: [],
 
     currentPageTitle: 'Início',
     selectedCategory: 'Tudo',
@@ -52,13 +46,12 @@ export const useStore = create<PlayerState>((set, get) => {
       if (item === 'Tudo') {
         get().load()
       } else {
-        const filteredBooks = get().books?.filter((book) => {
-          return book?.categories?.some((category) => {
-            return category?.category?.name === item
-          })
-        })
-
-        set({ books: filteredBooks })
+        // const filteredBooks = get().books?.filter((book) => {
+        //   return book?.categories?.some((category) => {
+        //     return category?.category?.name === item
+        //   })
+        // })
+        // set({ books: filteredBooks })
       }
 
       set({ selectedCategory: item })
@@ -66,11 +59,10 @@ export const useStore = create<PlayerState>((set, get) => {
 
     handleSearch: (text: string) => {
       if (text !== '') {
-        const filteredBooks = get().books.filter((book) => {
-          return book.name.toLowerCase().includes(text.toLowerCase())
-        })
-
-        set({ books: filteredBooks })
+        // const filteredBooks = get().books.filter((book) => {
+        //   return book.name.toLowerCase().includes(text.toLowerCase())
+        // })
+        // set({ books: filteredBooks })
       } else {
         get().load()
       }
@@ -83,17 +75,11 @@ export const useStore = create<PlayerState>((set, get) => {
     load: async () => {
       set({ isLoading: true })
 
-      const books = await api.get('/books')
-      const categories = await api.get('/categories')
-      const ratings = await api.get('/ratings')
       const users = await api.get('/users')
       const account = await api.get('/account')
       const session = await api.get('/session')
 
       set({
-        books: books.data,
-        categories: categories.data,
-        ratings: ratings.data,
         users: users.data,
         account: account.data,
         session: session.data,
@@ -106,25 +92,15 @@ export const useStore = create<PlayerState>((set, get) => {
 // Colocar um novo nome
 export const useCurrentData = () => {
   return useStore((state) => {
-    const currentBook = state.books.find(
-      (book) => book.id === state.currentBookId
-    )
+    // const currentBook = state.books.find(
+    //   (book) => book.id === state.currentBookId
+    // )
 
     const currentUser = state.users.find(
       (user) => user.email === state.currentUserEmail
     )
 
-    const myLastRating = state.ratings.find(
-      (ratings) => ratings.user.id === currentUser?.id
-    )
-
-    const myRatings = state.ratings.filter(
-      (ratings) => ratings.user.id === currentUser?.id
-    )
-
     const {
-      books,
-      categories,
       currentPageTitle,
       isLoading,
       selectedCategory,
@@ -134,18 +110,13 @@ export const useCurrentData = () => {
     } = state
 
     return {
-      books,
-      categories,
       currentPageTitle,
       isLoading,
       selectedCategory,
-      currentBook,
       users,
       account,
       currentUserEmail,
-      currentUser,
-      myLastRating,
-      myRatings
+      currentUser
     }
   })
 }

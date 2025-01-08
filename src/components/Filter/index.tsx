@@ -4,9 +4,16 @@ import * as ScrollArea from '@radix-ui/react-scroll-area'
 import { useCurrentData } from '@/zustand-store'
 
 import FilterItem from './FilterItem'
+import { useQuery } from '@tanstack/react-query'
+import { getCategories } from '@/service/categories-service'
 
 export function Filter() {
-  const { categories, selectedCategory } = useCurrentData()
+  const { data: categories } = useQuery({
+    queryKey: ['categories'],
+    queryFn: getCategories
+  })
+
+  const { selectedCategory } = useCurrentData()
 
   return (
     <ScrollArea.Root>

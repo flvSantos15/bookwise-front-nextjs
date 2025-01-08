@@ -1,5 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
+
+import { useEffect } from 'react'
+import { SessionProvider } from 'next-auth/react'
+
+import { useStore } from '@/zustand-store'
 
 import { Analitics } from '@/components/Analitics'
 import { Container } from '@/components/Container'
@@ -7,10 +13,6 @@ import { HeaderPage } from '@/components/HeaderPage'
 import { Input } from '@/components/Input'
 import { MyReviewList } from '@/components/MyReview'
 import { Sidebar } from '@/components/Sidebar'
-import { useStore } from '@/zustand-store'
-import { SessionProvider } from 'next-auth/react'
-import { useEffect } from 'react'
-import StarRatings from 'react-star-ratings'
 
 export function ProfilePage() {
   const { load, books } = useStore((store) => {

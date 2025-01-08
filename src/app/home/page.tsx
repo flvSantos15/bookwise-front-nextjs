@@ -2,13 +2,14 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
 import { IoIosArrowForward } from 'react-icons/io'
 import { useRouter } from 'next/navigation'
-import { SessionProvider, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 import { useCurrentData, useStore } from '@/zustand-store'
+import { getMyLastingRating } from '@/service/rating-service'
 
 import { RecentPublishedBookList } from '@/components/RecentPublishedBookList'
 import { RatingList } from '@/components/RatingList'
@@ -18,29 +19,23 @@ import { Container } from '@/components/Container'
 import { Spinner } from '@/components/Spinner'
 import { ReviewCard } from '@/components/ReviewCard'
 
-export function HomePage() {
+export default function HomePage() {
   const router = useRouter()
   const { status } = useSession()
 
-  const { load, setCurrentPageTitle, books } = useStore((store) => {
-    return {
-      load: store.load,
-      books: store.books,
-      setCurrentPageTitle: store.setCurrentPageTitle
-    }
+  const { data: myLastRating } = useQuery({
+    queryKey: ['myLastRating'],
+    queryFn: getMyLastingRating
   })
 
-  const { isLoading, myLastRating } = useCurrentData()
+  const setCurrentPageTitle = useStore((store) => store.setCurrentPageTitle)
+
+  const { isLoading } = useCurrentData()
 
   function handleRedirectToExplorePage() {
     setCurrentPageTitle('Explorer')
     router.push('/explorer')
   }
-
-  useEffect(() => {
-    if (books) return
-    load()
-  }, [books])
 
   if (isLoading) {
     return (
@@ -116,13 +111,5 @@ export function HomePage() {
         </Container>
       </div>
     </div>
-  )
-}
-
-export default function Home() {
-  return (
-    <SessionProvider>
-      <HomePage />
-    </SessionProvider>
   )
 }

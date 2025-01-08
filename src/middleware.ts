@@ -1,9 +1,11 @@
 // export { auth as middleware } from '@/auth'
 import { auth } from '@/auth'
 import { NextRequest, NextResponse } from 'next/server'
+import { setCookie } from 'nookies'
 
 const protectedRoutes = ['/profile']
 const listRoutes = ['/home', '/explorer', '/profile']
+const userIdTokenExpiration = 60 * 60 * 24 * 1
 
 export default async function middleware(req: NextRequest) {
   const session = await auth()
@@ -24,6 +26,16 @@ export default async function middleware(req: NextRequest) {
   if (session && !isListRoute) {
     const absoluteURL = new URL('/home', req.nextUrl.origin)
     return NextResponse.redirect(absoluteURL.toString())
+  }
+
+  if (session) {
+    const userId = session.user?.id
+    if (userId) {
+      setCookie(undefined, '@bookwise:userId', userId, {
+        maxAge: userIdTokenExpiration,
+        path: '/'
+      })
+    }
   }
 
   return NextResponse.next()

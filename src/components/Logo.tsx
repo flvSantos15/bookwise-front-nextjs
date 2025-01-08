@@ -1,6 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
+
+import Image from 'next/image'
+import logo from '../../public/images/logo.png'
+
 export function Logo() {
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img src="/images/logo.png" alt="logo" className="object-cover" />
-  )
+  return <Image src={logo} alt="logo" className="object-cover" />
 }

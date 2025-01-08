@@ -1,31 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
-import { useEffect } from 'react'
 import * as ScrollArea from '@radix-ui/react-scroll-area'
-
-import { useStore } from '@/zustand-store'
 
 import { Filter } from '@/components/Filter'
 import { BookList } from '@/components/BookList'
 import { HeaderPage } from '@/components/HeaderPage'
 import { Sidebar } from '@/components/Sidebar'
 import { Input } from '@/components/Input'
-import { SessionProvider } from 'next-auth/react'
 
-export function ExplorerPage() {
-  const { load, books } = useStore((store) => {
-    return {
-      load: store.load,
-      books: store.books
-    }
-  })
-
-  useEffect(() => {
-    if (books) return
-    load()
-  }, [books])
-
+export default function ExplorerPage() {
   return (
     <div className="w-full flex h-[100%] gap-24">
       <Sidebar />
@@ -54,13 +38,5 @@ export function ExplorerPage() {
         </ScrollArea.Root>
       </div>
     </div>
-  )
-}
-
-export default function Explorer() {
-  return (
-    <SessionProvider>
-      <ExplorerPage />
-    </SessionProvider>
   )
 }
