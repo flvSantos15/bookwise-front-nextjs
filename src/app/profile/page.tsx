@@ -13,20 +13,10 @@ import { HeaderPage } from '@/components/HeaderPage'
 import { Input } from '@/components/Input'
 import { MyReviewList } from '@/components/MyReview'
 import { Sidebar } from '@/components/Sidebar'
+import { useQuery } from '@tanstack/react-query'
+import { getBooks } from '@/service/book-service'
 
-export function ProfilePage() {
-  const { load, books } = useStore((store) => {
-    return {
-      load: store.load,
-      books: store.books
-    }
-  })
-
-  useEffect(() => {
-    if (books) return
-    load()
-  }, [books])
-
+export default function ProfilePage() {
   return (
     <div className="w-full flex h-[100%] gap-24">
       <Sidebar />
@@ -51,13 +41,5 @@ export function ProfilePage() {
         </Container>
       </div>
     </div>
-  )
-}
-
-export default function Profile() {
-  return (
-    <SessionProvider>
-      <ProfilePage />
-    </SessionProvider>
   )
 }

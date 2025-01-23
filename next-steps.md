@@ -2,7 +2,7 @@
 [X] - Adicionar servico de login social com o google
 [X] - Adicionar servico de login social com o github
 [] - Configurar um banco de dados para armazenar os dados de perfil do usuario
-[] - Configurar o banco para armazanar os dados das avaliacoes
+[] - Configurar o banco para armazenar os dados das avaliacoes
 [] - Adicionar o react-query na aplicacao
 [] - Adicionar responsividade
 [] - Criar tema dark e ligth
@@ -23,7 +23,7 @@
 
 ## Erros
 
-- Quando estoui na tela de explorer e volto pra home, fica carregando infinito.
+- Quando estou na tela de explorer e volto pra home, fica carregando infinito.
 - Quando faco login, saio e tento entrar novamente nao consigo.
 
 ## Detalhes

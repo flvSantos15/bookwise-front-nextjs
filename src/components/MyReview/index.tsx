@@ -1,4 +1,3 @@
-import StarRatings from 'react-star-ratings'
 import { MyReviewCard } from './ReviewCard'
 
 /* eslint-disable @next/next/no-img-element */

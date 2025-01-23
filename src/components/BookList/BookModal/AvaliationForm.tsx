@@ -4,6 +4,8 @@ import { IoMdCheckmark } from 'react-icons/io'
 import { FormEvent, useState } from 'react'
 import { useCurrentData, useStore } from '@/zustand-store'
 import { AvaliateBook } from '@/service/server-actions/avaliate-book'
+import { useQuery } from '@tanstack/react-query'
+import { getBooks } from '@/service/book-service'
 
 /* eslint-disable @next/next/no-img-element */
 interface AvaliationFormProps {
@@ -11,8 +13,21 @@ interface AvaliationFormProps {
 }
 
 export function AvaliationForm({ onCloseModal }: AvaliationFormProps) {
-  const load = useStore((store) => store.load)
-  const { currentUser, currentBook } = useCurrentData()
+  const { data: books } = useQuery({
+    queryKey: ['books'],
+    queryFn: getBooks
+  })
+
+  const { load, currentBook } = useStore((store) => {
+    const currentBook = books?.find((book) => book.id === store.currentBookId)
+
+    return {
+      load: store.load,
+      currentBook
+    }
+  })
+
+  const { currentUser } = useCurrentData()
 
   const [rating, setRating] = useState(0)
 

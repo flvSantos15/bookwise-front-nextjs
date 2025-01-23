@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 
 'use client'
@@ -28,7 +29,7 @@ export function FooterButton({
 
   useEffect(() => {
     getUserEmail(session?.user?.email!)
-  }, [])
+  }, [session])
 
   return (
     <button

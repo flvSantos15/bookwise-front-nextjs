@@ -5,7 +5,7 @@ import { PiUserListLight } from 'react-icons/pi'
 import { GoBookmark } from 'react-icons/go'
 
 import { AnaliticsItem } from './item'
-import { useCurrentData, useStore } from '@/zustand-store'
+import { useStore } from '@/zustand-store'
 import { useSession } from 'next-auth/react'
 
 interface AnaliticsProps {}
